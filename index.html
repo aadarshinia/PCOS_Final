@@ -1,0 +1,3621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PCOS Compass Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --glass-bg:rgba(255,255,255,.35);
+    --glass-border:rgba(255,255,255,.45);
+    --glass-shadow:0 8px 32px rgba(95,74,132,.12);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+
+    background:
+        radial-gradient(circle at top left,#FBE7FF 0%,#FFF8FC 40%,#F5EEFF 100%);
+    background-attachment:fixed;
+
+    color:#4D425C;
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:270px;
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:35px;
+
+display:flex;
+
+flex-direction:column;
+
+box-shadow:5px 0 25px rgba(0,0,0,.05);
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+bottom:0;
+
+}
+
+.logo{
+
+font-family:Fraunces,serif;
+
+font-size:30px;
+
+color:#A76BEB;
+
+margin-bottom:50px;
+
+}
+
+.menu{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.menu button{
+
+background:none;
+
+border:none;
+
+padding:18px;
+
+border-radius:18px;
+
+font-size:17px;
+
+cursor:pointer;
+
+text-align:left;
+
+transition:.3s;
+
+color:#665C76;
+
+}
+
+.menu button:hover{
+
+background:#F6ECFD;
+
+color:#A76BEB;
+
+transform:translateX(5px);
+
+}
+
+.menu button.active{
+
+background:linear-gradient(135deg,#EEDBFF,#F7ECFF);
+
+color:#7D4DD6;
+
+font-weight:600;
+
+}
+
+/* MAIN */
+
+.main{
+
+margin-left:270px;
+
+padding:50px;
+
+width:100%;
+
+}
+
+/* PAGE SYSTEM */
+
+.page{
+
+display:none;
+
+animation:fade .4s ease;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(15px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* HERO CARD */
+
+.welcome{
+
+background:rgba(255,255,255,.28);
+
+backdrop-filter:blur(24px);
+-webkit-backdrop-filter:blur(24px);
+
+border:1px solid rgba(255,255,255,.5);
+
+padding:45px;
+
+border-radius:35px;
+
+box-shadow:0 20px 40px rgba(95,74,132,.12);
+
+margin-bottom:35px;
+
+}
+
+.welcome h1{
+
+font-family:Fraunces;
+
+font-size:48px;
+
+color:#6949A7;
+
+margin-bottom:20px;
+
+}
+
+.welcome p{
+
+font-size:18px;
+
+line-height:1.8;
+
+max-width:700px;
+
+}
+
+/* SUMMARY */
+
+.summary{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+margin-bottom:35px;
+
+}
+
+.card{
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:0 15px 30px rgba(0,0,0,.05);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px) scale(1.02);
+
+    box-shadow:
+        0 20px 40px rgba(167,107,235,.18);
+
+}
+
+.card h3{
+
+font-family:Fraunces;
+
+color:#8056C8;
+
+margin-bottom:15px;
+
+}
+
+.big{
+
+font-size:32px;
+
+font-weight:bold;
+
+margin:10px 0;
+
+}
+
+/* QUICK ACTIONS */
+
+.actions{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+margin-bottom:35px;
+
+}
+
+.actions button{
+
+background:linear-gradient(135deg,#C58AF9,#A76BEB);
+
+border:none;
+
+color:white;
+
+padding:16px 28px;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:.3s;
+
+}
+
+.actions button:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* TIP */
+
+.tip{
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:35px;
+
+border-radius:25px;
+
+box-shadow:0 15px 30px rgba(0,0,0,.05);
+
+}
+
+.tip h2{
+
+font-family:Fraunces;
+
+margin-bottom:15px;
+
+color:#8056C8;
+
+}
+
+.tip p{
+
+line-height:1.8;
+
+}
+
+@media(max-width:900px){
+
+.sidebar{
+
+width:100%;
+
+height:auto;
+
+position:relative;
+
+}
+
+.main{
+
+margin-left:0;
+
+}
+
+body{
+
+flex-direction:column;
+
+}
+
+}
+/* ==========================
+RISK ASSESSMENT
+========================== */
+
+
+.assessment-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:30px;
+
+margin-bottom:30px;
+
+}
+
+
+
+.form-card{
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:35px;
+
+border-radius:28px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.05);
+
+}
+
+
+
+.form-card h2{
+
+font-family:Fraunces;
+
+color:#8056C8;
+
+margin-bottom:25px;
+
+}
+
+
+
+.form-card label{
+
+display:block;
+
+margin-top:18px;
+
+margin-bottom:8px;
+
+font-weight:500;
+
+}
+
+
+
+.form-card input[type="number"]{
+
+width:100%;
+
+padding:15px;
+
+border-radius:15px;
+
+border:1px solid #E8DDF5;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+
+
+.form-card input:focus{
+
+border-color:#B784D7;
+
+box-shadow:0 0 0 3px rgba(183,132,215,.15);
+
+}
+
+
+
+.checkbox{
+
+display:flex !important;
+
+align-items:center;
+
+gap:12px;
+
+margin-top:25px !important;
+
+}
+
+
+
+.checkbox input{
+
+width:20px;
+
+height:20px;
+
+}
+
+
+
+.button{
+
+border:none;
+
+cursor:pointer;
+
+}
+
+
+
+.result-card{
+
+margin-top:40px;
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:40px;
+
+border-radius:30px;
+
+text-align:center;
+
+box-shadow:0 20px 40px rgba(0,0,0,.08);
+
+}
+
+
+
+.risk-circle{
+
+width:160px;
+
+height:160px;
+
+border-radius:50%;
+
+margin:30px auto;
+
+background:
+
+linear-gradient(135deg,#C58AF9,#F6A9D7);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:white;
+
+font-size:40px;
+
+font-weight:bold;
+
+box-shadow:0 15px 30px rgba(167,107,235,.3);
+
+}
+
+
+
+.result-card ul{
+
+list-style:none;
+
+margin-top:20px;
+
+}
+
+
+
+.result-card li{
+
+background:#F8EEFF;
+
+padding:12px;
+
+margin:10px;
+
+border-radius:15px;
+
+}
+
+.wizard{
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+padding:30px;
+
+border-radius:20px;
+
+}
+
+.wizard-progress{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-bottom:40px;
+
+}
+
+.step{
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+background:#EEDCFF;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:bold;
+
+}
+
+.step.active{
+
+background:#B983FF;
+
+color:white;
+
+}
+
+.line{
+
+height:4px;
+
+width:80px;
+
+background:#EEDCFF;
+
+}
+
+.wizard-page{
+
+display:none;
+
+}
+
+.wizard-page.active{
+
+display:block;
+
+animation:fade .4s;
+
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+margin:25px 0;
+
+}
+
+.checkbox-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+margin:25px 0;
+
+}
+
+.form-grid input{
+
+padding:12px;
+
+border-radius:12px;
+
+border:1px solid #DDD;
+
+width:100%;
+
+}
+
+button{
+
+background:#9C6ADE;
+
+color:white;
+
+padding:12px 28px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+margin-top:20px;
+
+}
+
+button:hover{
+
+background:#8854d0;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+/* ==========================
+   SYMPTOM TRACKER
+========================== */
+
+
+.form-card input[type="date"],
+.form-card input[type="text"],
+.form-card textarea,
+.form-card select{
+
+width:100%;
+
+padding:15px;
+
+border-radius:15px;
+
+border:1px solid #E8DDF5;
+
+font-size:16px;
+
+font-family:Inter;
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+}
+
+
+.form-card textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+
+.form-card input[type="range"]{
+
+width:100%;
+
+accent-color:#B784D7;
+
+margin-top:15px;
+
+}
+
+
+
+#pain-value,
+#energy-value{
+
+display:inline-block;
+
+margin-top:8px;
+
+background:#F5E9FF;
+
+padding:5px 14px;
+
+border-radius:20px;
+
+color:#8056C8;
+
+font-weight:bold;
+
+}
+
+
+
+.history-card{
+
+background:#FFF8FE;
+
+padding:20px;
+
+border-radius:20px;
+
+margin-top:20px;
+
+border-left:5px solid #C58AF9;
+
+}
+
+
+
+.history-card h3{
+
+font-family:Fraunces;
+
+color:#8056C8;
+
+}
+
+
+
+.delete-btn{
+
+background:#FFD9E8;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+margin-top:15px;
+
+color:#8B4765;
+
+/* ==========================
+   ANALYTICS
+========================== */
+
+
+canvas{
+
+max-height:350px;
+
+}
+
+
+
+.form-card canvas{
+
+margin-top:20px;
+
+}
+
+
+
+#analytics .card{
+
+text-align:center;
+
+}
+
+
+
+#analytics .big{
+
+color:#A76BEB;
+
+}
+
+}
+/* ==========================
+AI CHAT
+========================== */
+
+
+.chat-container{
+
+background:var(--glass-bg);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid var(--glass-border);
+
+box-shadow:var(--glass-shadow);
+
+border-radius:30px;
+
+padding:30px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.05);
+
+}
+
+
+
+.chat-messages{
+
+height:400px;
+
+overflow-y:auto;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.bot-message,
+.user-message{
+
+padding:15px 20px;
+
+border-radius:20px;
+
+max-width:75%;
+
+line-height:1.6;
+
+}
+
+
+
+.bot-message{
+
+background:#F5E9FF;
+
+align-self:flex-start;
+
+}
+
+
+
+.user-message{
+
+background:#C58AF9;
+
+color:white;
+
+align-self:flex-end;
+
+}
+
+
+
+
+
+.chat-input{
+
+display:flex;
+
+gap:15px;
+
+}
+
+
+
+.chat-input input{
+
+flex:1;
+
+padding:15px;
+
+border-radius:30px;
+
+border:1px solid #E8DDF5;
+
+font-size:16px;
+
+}
+
+
+
+.chat-input button{
+
+border:none;
+
+background:#A76BEB;
+
+color:white;
+
+padding:15px 25px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+}
+
+
+
+
+/* Library */
+
+
+.library-btn{
+
+margin-top:15px;
+
+border:none;
+
+background:#F1E3FF;
+
+padding:10px 20px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+color:#8056C8;
+
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+🌸 PCOS Compass
+
+</div>
+
+<div class="menu">
+
+<button class="active" onclick="showPage('dashboard')">
+🏠 Dashboard
+</button>
+
+<button onclick="showPage('assessment-page')">
+🩺 Risk Assessment
+</button>
+
+<button onclick="showPage('tracker')">
+📅 Symptom Tracker
+</button>
+
+<button onclick="showPage('analytics')">
+📈 Analytics
+</button>
+
+<button onclick="showPage('library')">
+📚 Library
+</button>
+
+<button onclick="showPage('chat')">
+🤖 AI Assistant
+</button>
+
+<button>
+⚙ Settings
+</button>
+
+</div>
+
+</div>
+
+<div class="main">
+
+<section id="dashboard" class="page active">
+
+<div class="welcome">
+
+<h1>
+
+Welcome Back 🌸
+
+</h1>
+
+<p>
+
+PCOS Compass is your personalized wellness dashboard designed to help you better understand your health. Track symptoms, estimate your PCOS risk using machine learning, visualize trends over time, explore educational resources, and chat with an AI assistant—all in one place.
+
+</p>
+
+</div>
+
+<div class="summary">
+
+<div class="card">
+
+<h3>Current Risk</h3>
+
+<div class="big">--%</div>
+
+<p>No assessment completed yet.</p>
+
+</div>
+
+<div class="card">
+
+<h3>Today's Check-In</h3>
+
+<div class="big">Pending</div>
+
+<p>Log today's symptoms.</p>
+
+</div>
+
+<div class="card">
+
+<h3>Journal Entries</h3>
+
+<div class="big">0</div>
+
+<p>Your health history starts here.</p>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button onclick="showPage('risk')">
+🩺 Calculate Risk
+</button>
+
+<button onclick="showPage('tracker')">
+📅 New Check-In
+</button>
+
+<button onclick="showPage('chat')">
+🤖 Ask AI
+</button>
+
+</div>
+
+<div class="tip">
+
+<h2>
+
+🌿 Today's Wellness Tip
+
+</h2>
+
+<p>
+
+Small habits can make a difference over time. Prioritizing consistent sleep, staying hydrated, and eating balanced meals may support overall hormonal health. Use this app to observe patterns and discuss any concerns with your healthcare provider.
+
+</p>
+
+</div>
+
+</section>
+<!-- ===========================
+     RISK ASSESSMENT PAGE
+=========================== -->
+
+<section id="assessment-page" class="page">
+
+<h2>🩺 PCOS Clinical Risk Assessment</h2>
+
+<div class="wizard">
+
+<!-- STEP INDICATOR -->
+
+<div class="wizard-progress">
+
+<div class="step active">1</div>
+
+<div class="line"></div>
+
+<div class="step">2</div>
+
+<div class="line"></div>
+
+<div class="step">3</div>
+
+<div class="line"></div>
+
+<div class="step">4</div>
+
+<div class="line"></div>
+
+<div class="step">5</div>
+
+</div>
+
+<!-- STEP 1 -->
+
+<div class="wizard-page active" id="step1">
+
+<h3>Basic Information</h3>
+
+<div class="form-grid">
+
+<div>
+
+<label>Age</label>
+
+<input type="number" id="age">
+
+</div>
+
+<div>
+
+<label>Height (cm)</label>
+
+<input type="number" id="height">
+
+</div>
+
+<div>
+
+<label>Weight (kg)</label>
+
+<input type="number" id="weight">
+
+</div>
+
+<div>
+
+<label>Waist / Hip Ratio</label>
+
+<input type="number" step="0.01" id="waist_hip_ratio">
+
+</div>
+
+</div>
+
+<button onclick="nextStep()">
+
+Next →
+
+</button>
+
+</div>
+<div class="wizard-page" id="step2">
+
+<h3>Menstrual Health</h3>
+
+<div class="form-grid">
+
+<div>
+
+<label>Cycle Length (days)</label>
+
+<input type="number" id="cycle_length">
+
+</div>
+
+<div>
+
+<label>
+
+<input type="checkbox" id="irregular">
+
+Irregular Periods
+
+</label>
+
+</div>
+
+</div>
+
+<button onclick="previousStep()">
+
+← Back
+
+</button>
+
+<button onclick="nextStep()">
+
+Next →
+
+</button>
+
+</div>
+<div class="wizard-page" id="step3">
+
+<h3>Symptoms</h3>
+
+<div class="checkbox-grid">
+
+<label><input type="checkbox" id="acne"> Acne</label>
+
+<label><input type="checkbox" id="hair_growth"> Excess Hair Growth</label>
+
+<label><input type="checkbox" id="hair_loss"> Hair Loss</label>
+
+<label><input type="checkbox" id="weight_gain"> Weight Gain</label>
+
+<label><input type="checkbox" id="skin_darkening"> Skin Darkening</label>
+
+</div>
+
+<button onclick="previousStep()">
+
+← Back
+
+</button>
+
+<button onclick="nextStep()">
+
+Next →
+
+</button>
+
+</div>
+<div class="wizard-page" id="step4">
+
+<h3>Clinical Tests</h3>
+
+<div class="form-grid">
+
+<div>
+
+<label>Testosterone</label>
+
+<input type="number" id="testosterone">
+
+</div>
+
+<div>
+
+<label>LH</label>
+
+<input type="number" id="lh">
+
+</div>
+
+<div>
+
+<label>FSH</label>
+
+<input type="number" id="fsh">
+
+</div>
+
+<div>
+
+<label>AMH</label>
+
+<input type="number" id="amh">
+
+</div>
+
+<div>
+
+<label>TSH</label>
+
+<input type="number" id="tsh">
+
+</div>
+
+<div>
+
+<label>Blood Glucose</label>
+
+<input type="number" id="rbs">
+
+</div>
+
+<div>
+
+<label>Vitamin D</label>
+
+<input type="number" id="vitamin_d">
+
+</div>
+
+<div>
+
+<label>Follicle Count</label>
+
+<input type="number" id="follicles">
+
+</div>
+
+</div>
+
+<button onclick="previousStep()">
+
+← Back
+
+</button>
+
+<button onclick="nextStep()">
+
+Next →
+
+</button>
+
+</div>
+<div class="wizard-page" id="step5">
+
+<h3>Lifestyle</h3>
+
+<div class="checkbox-grid">
+
+<label>
+
+<input type="checkbox" id="fast_food">
+
+Frequent Fast Food
+
+</label>
+
+<label>
+
+<input type="checkbox" id="exercise" checked>
+
+Regular Exercise
+
+</label>
+
+</div>
+
+<button onclick="previousStep()">
+
+← Back
+
+</button>
+
+<button onclick="calculateRisk()">
+
+Calculate Risk
+
+</button>
+
+</div>
+
+</div>
+
+<div id="risk-result" class="result-card" style="display:none">
+
+<h2>
+
+Risk Score:
+
+<span id="risk-score"></span>
+
+</h2>
+
+<h3>Contributing Factors</h3>
+
+<ul id="risk-factors"></ul>
+
+</div>
+
+</section>
+
+<!-- ===========================
+     SYMPTOM TRACKER PAGE
+=========================== -->
+
+<section id="tracker" class="page">
+
+
+<div class="welcome">
+
+<h1>
+📅 Symptom Tracker
+</h1>
+
+<p>
+Record your daily symptoms, lifestyle habits, and cycle information to discover patterns over time.
+</p>
+
+</div>
+
+
+
+<div class="assessment-grid">
+
+
+<div class="form-card">
+
+
+<h2>
+🌸 Cycle Information
+</h2>
+
+
+<label>
+Period Start
+</label>
+
+<input 
+type="date"
+id="period-start"
+>
+
+
+
+<label>
+Period End
+</label>
+
+<input 
+type="date"
+id="period-end"
+>
+
+
+</div>
+
+
+
+
+<div class="form-card">
+
+
+<h2>
+💜 Daily Wellness
+</h2>
+
+
+<label>
+Pain Level (0-10)
+</label>
+
+<input 
+type="range"
+id="pain"
+min="0"
+max="10"
+value="0"
+>
+
+
+<span id="pain-value">
+0
+</span>
+
+
+
+<label>
+Energy Level (0-10)
+</label>
+
+<input 
+type="range"
+id="energy"
+min="0"
+max="10"
+value="5"
+>
+
+
+<span id="energy-value">
+5
+</span>
+
+
+
+<label>
+Sleep Hours
+</label>
+
+<input
+type="number"
+id="sleep"
+placeholder="7"
+value="7"
+>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="assessment-grid">
+
+
+<div class="form-card">
+
+
+<h2>
+😊 Symptoms
+</h2>
+
+
+
+<label>
+Acne Severity
+</label>
+
+
+<select id="acne">
+
+<option>
+None
+</option>
+
+<option>
+Mild
+</option>
+
+<option>
+Moderate
+</option>
+
+<option>
+Severe
+</option>
+
+</select>
+
+
+
+
+<label>
+Mood
+</label>
+
+
+<select id="mood">
+
+<option>
+Happy
+</option>
+
+<option>
+Neutral
+</option>
+
+<option>
+Stressed
+</option>
+
+<option>
+Anxious
+</option>
+
+<option>
+Low
+</option>
+
+</select>
+
+
+</div>
+
+
+
+
+<div class="form-card">
+
+
+<h2>
+📝 Notes
+</h2>
+
+
+<label>
+Medication
+</label>
+
+
+<input
+type="text"
+id="medication"
+placeholder="Optional"
+>
+
+
+
+<label>
+Additional Notes
+</label>
+
+
+<textarea
+id="notes"
+placeholder="How are you feeling today?"
+></textarea>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<button 
+class="actions button"
+onclick="saveSymptom()"
+>
+
+🌸 Save Check-In
+
+</button>
+
+
+
+
+<div 
+class="tip"
+style="margin-top:40px"
+>
+
+
+<h2>
+📖 Your History
+</h2>
+
+
+<div id="history">
+
+<p>
+No entries yet.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+    <div class="summary">
+
+
+        <div class="card">
+
+            <h3>
+                😊 Mood
+            </h3>
+
+            <p>
+                Record emotional changes and patterns.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                🌙 Sleep
+            </h3>
+
+            <p>
+                Track your nightly sleep duration.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                ⚡ Energy
+            </h3>
+
+            <p>
+                Monitor daily energy levels.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="tip">
+
+        <h2>
+            Your Journal
+        </h2>
+
+        <p>
+            Your symptom entries and wellness suggestions will appear here.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ===========================
+     ANALYTICS PAGE
+=========================== -->
+
+<section id="analytics" class="page">
+
+
+<div class="welcome">
+
+<h1>
+📈 Health Analytics
+</h1>
+
+
+<p>
+
+Visualize patterns between your symptoms, lifestyle habits, and wellness trends over time.
+
+</p>
+
+
+</div>
+
+
+
+<div class="summary">
+
+
+<div class="card">
+
+<h3>
+🌙 Sleep Average
+</h3>
+
+
+<div class="big" id="avg-sleep">
+--
+</div>
+
+
+<p>
+Hours per night
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🩺 Pain Average
+</h3>
+
+
+<div class="big" id="avg-pain">
+--
+</div>
+
+
+<p>
+Pain level out of 10
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+⚡ Energy Average
+</h3>
+
+
+<div class="big" id="avg-energy">
+--
+</div>
+
+
+<p>
+Daily energy level
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="assessment-grid">
+
+
+<div class="form-card">
+
+
+<h2>
+🌙 Sleep & Pain Trends
+</h2>
+
+
+<canvas id="sleepPainChart"></canvas>
+
+
+</div>
+
+
+
+
+
+<div class="form-card">
+
+
+<h2>
+⚡ Energy Trends
+</h2>
+
+
+<canvas id="energyChart"></canvas>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="form-card">
+
+
+<h2>
+😊 Mood Distribution
+</h2>
+
+
+<canvas id="moodChart"></canvas>
+
+
+</div>
+
+
+
+
+</section>
+
+
+    <div class="summary">
+
+
+        <div class="card">
+
+            <h3>
+                Sleep Trends
+            </h3>
+
+            <p>
+                Visualization coming soon.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                Pain Patterns
+            </h3>
+
+            <p>
+                Visualization coming soon.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                Cycle History
+            </h3>
+
+            <p>
+                Visualization coming soon.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ===========================
+     EDUCATIONAL LIBRARY PAGE
+=========================== -->
+
+<section id="library" class="page">
+
+
+<div class="welcome">
+
+<h1>
+📚 Educational Library
+</h1>
+
+<p>
+Explore evidence-based information about PCOS, hormones, lifestyle,
+and wellness.
+</p>
+
+</div>
+
+
+
+
+<div class="summary">
+
+
+<div class="card">
+
+<h3>
+🌸 Understanding PCOS
+</h3>
+
+<p>
+Learn what PCOS is, common symptoms, and how it affects hormones.
+</p>
+
+<button 
+onclick="showArticle('pcos')"
+class="library-btn"
+>
+
+Read More
+
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🧬 Hormones & PCOS
+</h3>
+
+<p>
+Understand testosterone, insulin resistance, and hormonal balance.
+</p>
+
+
+<button 
+onclick="showArticle('hormones')"
+class="library-btn"
+>
+
+Read More
+
+</button>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🥗 Nutrition & Lifestyle
+</h3>
+
+<p>
+Learn how sleep, movement, and nutrition may support wellness.
+</p>
+
+
+<button 
+onclick="showArticle('lifestyle')"
+class="library-btn"
+>
+
+Read More
+
+</button>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🩺 Diagnosis & Treatment
+</h3>
+
+<p>
+Understand clinical evaluation and treatment options.
+</p>
+
+
+<button 
+onclick="showArticle('diagnosis')"
+class="library-btn"
+>
+
+Read More
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div 
+id="article-box"
+class="tip"
+style="display:none"
+>
+
+
+<h2 id="article-title">
+
+</h2>
+
+
+<p id="article-text">
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+    <div class="summary">
+
+
+        <div class="card">
+
+            <h3>
+                🌸 Hormones
+            </h3>
+
+            <p>
+                Learn how hormones influence symptoms.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🥗 Nutrition
+            </h3>
+
+            <p>
+                Explore nutrition topics related to PCOS.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🧘 Lifestyle
+            </h3>
+
+            <p>
+                Learn about exercise, sleep, and stress.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ===========================
+     AI CHAT PAGE
+=========================== -->
+
+<section id="chat" class="page">
+
+
+<div class="welcome">
+
+<h1>
+🤖 PCOS AI Assistant
+</h1>
+
+
+<p>
+
+Ask questions about PCOS, symptoms, lifestyle, nutrition, and general health education.
+
+</p>
+
+</div>
+
+
+
+
+
+<div class="chat-container">
+
+
+<div 
+id="chat-messages"
+class="chat-messages"
+>
+
+
+<div class="bot-message">
+
+Hello 🌸 I am your PCOS educational assistant.
+How can I help you today?
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="chat-input">
+
+
+<input
+id="chat-input"
+placeholder="Ask a question..."
+>
+
+
+
+<button
+onclick="sendMessage()"
+>
+
+Send
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+    <div class="tip">
+
+
+        <h2>
+            Conversation
+        </h2>
+
+
+        <p>
+            Your AI chat interface will appear here.
+        </p>
+
+
+    </div>
+
+
+
+</section>
+
+
+</div>
+
+
+<script>
+
+
+function showPage(pageId){
+
+
+    const pages =
+    document.querySelectorAll(".page");
+
+
+    pages.forEach(page=>{
+
+        page.classList.remove("active");
+
+    });
+
+
+
+    document
+    .getElementById(pageId)
+    .classList.add("active");
+
+
+
+    const buttons =
+    document.querySelectorAll(".menu button");
+
+
+    buttons.forEach(button=>{
+
+        button.classList.remove("active");
+
+    });
+
+
+
+    event.target.classList.add("active");
+
+
+
+    // Load analytics whenever user opens page
+
+    if(pageId==="analytics"){
+
+        loadAnalytics();
+
+    }
+
+
+    // Load tracker history whenever opened
+
+    if(pageId==="tracker"){
+
+        loadHistory();
+
+    }
+
+
+}
+async function calculateRisk(){
+
+
+const data = {
+    profile: {
+        age: Number(document.getElementById("age").value),
+        height: Number(document.getElementById("height").value),
+        weight: Number(document.getElementById("weight").value),
+
+        testosterone: Number(document.getElementById("testosterone").value),
+        lh: Number(document.getElementById("lh").value),
+        fsh: Number(document.getElementById("fsh").value),
+        amh: Number(document.getElementById("amh").value),
+        tsh: Number(document.getElementById("tsh").value),
+        rbs: Number(document.getElementById("rbs").value),
+        vitamin_d: Number(document.getElementById("vitamin_d").value),
+
+        follicle_count: Number(document.getElementById("follicles").value),
+        cycle_length: Number(document.getElementById("cycle_length").value),
+
+        irregular_periods: document.getElementById("irregular").checked,
+        acne: document.getElementById("acne").checked,
+        hair_growth: document.getElementById("hair_growth").checked,
+        hair_loss: document.getElementById("hair_loss").checked,
+        weight_gain: document.getElementById("weight_gain").checked,
+        skin_darkening: document.getElementById("skin_darkening").checked,
+        fast_food: document.getElementById("fast_food").checked,
+        exercise: document.getElementById("exercise").checked,
+
+        waist_hip_ratio: Number(document.getElementById("waist_hip_ratio").value)
+    }
+};
+
+
+try{
+
+
+const response = await fetch(
+"/api/predict",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(data)
+
+}
+
+);
+
+
+
+const result = await response.json();
+
+
+
+displayRiskResult(result);
+
+
+
+}
+
+catch(error){
+
+
+alert(
+"Unable to calculate risk. Please check that the server is running."
+);
+
+
+console.error(error);
+
+
+}
+
+
+
+}
+
+
+
+function displayRiskResult(result){
+
+
+const box =
+document.getElementById("risk-result");
+
+
+
+box.style.display="block";
+
+
+
+document.getElementById("risk-score")
+.innerText =
+result.risk_score + "%";
+
+
+
+const list =
+document.getElementById("risk-factors");
+
+
+
+list.innerHTML="";
+
+
+
+if(result.important_factors.length===0){
+
+
+list.innerHTML=
+"<li>No major contributing factors detected.</li>";
+
+
+}
+
+else{
+
+
+result.important_factors.forEach(
+factor=>{
+
+
+const li=document.createElement("li");
+
+li.innerText="✓ "+factor;
+
+
+list.appendChild(li);
+
+
+});
+
+
+}
+
+
+
+}
+
+let currentStep = 1;
+
+function showStep(step){
+
+document.querySelectorAll(".wizard-page").forEach(page=>{
+
+page.classList.remove("active");
+
+});
+
+document.getElementById("step"+step).classList.add("active");
+
+document.querySelectorAll(".step").forEach((s,index)=>{
+
+if(index<step){
+
+s.classList.add("active");
+
+}else{
+
+s.classList.remove("active");
+
+}
+
+});
+
+}
+
+function nextStep(){
+
+if(currentStep<5){
+
+currentStep++;
+
+showStep(currentStep);
+
+}
+
+}
+
+function previousStep(){
+
+if(currentStep>1){
+
+currentStep--;
+
+showStep(currentStep);
+
+}
+
+}
+
+showStep(1);
+// ============================
+// SYMPTOM TRACKER
+// ============================
+
+
+
+document
+.getElementById("pain")
+?.addEventListener(
+"input",
+function(){
+
+document.getElementById("pain-value")
+.innerText=this.value;
+
+}
+);
+
+
+
+document
+.getElementById("energy")
+?.addEventListener(
+"input",
+function(){
+
+document.getElementById("energy-value")
+.innerText=this.value;
+
+}
+);
+
+
+
+
+
+async function saveSymptom(){
+
+
+const entry={
+
+
+period_start:
+document.getElementById("period-start").value,
+
+
+period_end:
+document.getElementById("period-end").value,
+
+
+pain:Number(
+document.getElementById("pain").value
+),
+
+
+
+acne:
+document.getElementById("acne").value,
+
+
+
+mood:
+document.getElementById("mood").value,
+
+
+
+energy:Number(
+document.getElementById("energy").value
+),
+
+
+
+weight:65,
+
+
+
+sleep:Number(
+document.getElementById("sleep").value
+),
+
+
+
+medication:
+document.getElementById("medication").value,
+
+
+
+notes:
+document.getElementById("notes").value
+
+
+
+};
+
+
+
+try{
+
+
+await fetch(
+"/api/tracker",
+{
+
+method:"POST",
+
+headers:{
+
+
+"Content-Type":"application/json"
+
+
+},
+
+body:JSON.stringify(entry)
+
+
+}
+
+);
+
+
+
+alert(
+"Symptom entry saved 🌸"
+);
+
+
+
+loadHistory();
+
+
+
+}
+
+
+catch(error){
+
+
+console.error(error);
+
+alert(
+"Could not save entry."
+);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+async function loadHistory(){
+
+
+const response =
+await fetch("/api/tracker");
+
+
+const data =
+await response.json();
+
+
+
+const history =
+document.getElementById("history");
+
+
+
+history.innerHTML="";
+
+
+
+if(data.length===0){
+
+
+history.innerHTML=
+"<p>No entries yet.</p>";
+
+
+return;
+
+
+}
+
+
+
+data.reverse().forEach(
+(entry,index)=>{
+
+
+const card=document.createElement("div");
+
+
+card.className="history-card";
+
+
+
+card.innerHTML=`
+
+<h3>
+${entry.date}
+</h3>
+
+
+<p>
+😊 Mood: ${entry.mood}
+</p>
+
+
+<p>
+🩺 Pain: ${entry.pain}/10
+</p>
+
+
+<p>
+⚡ Energy: ${entry.energy}/10
+</p>
+
+
+<p>
+🌙 Sleep: ${entry.sleep} hours
+</p>
+
+
+<p>
+📝 ${entry.notes || "No notes"}
+</p>
+
+
+<button 
+class="delete-btn"
+onclick="deleteSymptom(${index})"
+>
+
+Delete
+
+</button>
+
+
+`;
+
+
+
+history.appendChild(card);
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+async function deleteSymptom(index){
+
+
+await fetch(
+`/api/tracker/${index}`,
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+loadHistory();
+
+
+}
+
+
+
+
+
+
+// Load tracker history when page opens
+
+window.addEventListener(
+"load",
+()=>{
+
+loadHistory();
+
+}
+
+);
+// =====================================
+// ANALYTICS DASHBOARD
+// =====================================
+
+
+let sleepPainChart;
+let energyChart;
+let moodChart;
+
+
+
+
+async function loadAnalytics(){
+console.log("Loading analytics...");
+
+try{
+
+
+const response =
+await fetch("/api/tracker");
+
+
+
+const entries =
+await response.json();
+console.log("Tracker data:", entries);
+
+
+if(entries.length===0){
+
+return;
+
+}
+
+
+
+calculateAverages(entries);
+
+createCharts(entries);
+
+
+
+}
+
+catch(error){
+
+console.error(
+"Analytics error:",
+error
+);
+
+}
+
+
+}
+
+
+
+
+
+function calculateAverages(entries){
+
+
+
+let sleepTotal=0;
+
+let painTotal=0;
+
+let energyTotal=0;
+
+
+
+entries.forEach(entry=>{
+
+
+sleepTotal += Number(entry.sleep);
+
+painTotal += Number(entry.pain);
+
+energyTotal += Number(entry.energy);
+
+
+});
+
+
+
+document.getElementById("avg-sleep")
+.innerText =
+(
+sleepTotal / entries.length
+).toFixed(1);
+
+
+
+document.getElementById("avg-pain")
+.innerText =
+(
+painTotal / entries.length
+).toFixed(1);
+
+
+
+document.getElementById("avg-energy")
+.innerText =
+(
+energyTotal / entries.length
+).toFixed(1);
+
+
+
+}
+
+
+
+
+
+function createCharts(entries){
+
+
+
+const dates =
+entries.map(
+entry=>entry.date
+);
+
+
+
+const sleep =
+entries.map(
+entry=>entry.sleep
+);
+
+
+
+const pain =
+entries.map(
+entry=>entry.pain
+);
+
+
+
+const energy =
+entries.map(
+entry=>entry.energy
+);
+
+
+
+
+
+// Sleep vs Pain
+
+
+const sleepPainContext =
+document
+.getElementById("sleepPainChart")
+.getContext("2d");
+
+
+
+if(sleepPainChart){
+
+sleepPainChart.destroy();
+
+}
+
+
+
+sleepPainChart =
+new Chart(
+sleepPainContext,
+{
+
+
+type:"line",
+
+
+data:{
+
+
+labels:dates,
+
+
+datasets:[
+
+
+{
+
+label:"Sleep Hours",
+
+data:sleep,
+
+borderColor:"#A76BEB",
+
+backgroundColor:
+"rgba(167,107,235,.2)",
+
+tension:.4
+
+},
+
+
+
+{
+
+label:"Pain Level",
+
+data:pain,
+
+borderColor:"#F28BB5",
+
+backgroundColor:
+"rgba(242,139,181,.2)",
+
+tension:.4
+
+}
+
+
+]
+
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+
+}
+
+);
+
+
+
+
+
+
+// Energy Chart
+
+
+const energyContext =
+document
+.getElementById("energyChart")
+.getContext("2d");
+
+
+
+if(energyChart){
+
+energyChart.destroy();
+
+}
+
+
+
+energyChart =
+new Chart(
+energyContext,
+{
+
+
+type:"bar",
+
+
+data:{
+
+
+labels:dates,
+
+
+datasets:[
+
+{
+
+label:"Energy",
+
+data:energy,
+
+backgroundColor:"#C58AF9"
+
+}
+
+]
+
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+
+}
+
+);
+
+
+
+
+
+
+// Mood Chart
+
+
+const moodCounts={};
+
+
+
+entries.forEach(entry=>{
+
+
+if(moodCounts[entry.mood]){
+
+
+moodCounts[entry.mood]++;
+
+}
+
+else{
+
+
+moodCounts[entry.mood]=1;
+
+
+}
+
+
+});
+
+
+
+
+
+const moodContext =
+document
+.getElementById("moodChart")
+.getContext("2d");
+
+
+
+if(moodChart){
+
+moodChart.destroy();
+
+}
+
+
+
+moodChart =
+new Chart(
+moodContext,
+{
+
+
+type:"doughnut",
+
+
+data:{
+
+
+labels:Object.keys(moodCounts),
+
+
+datasets:[
+
+{
+
+data:Object.values(moodCounts),
+
+backgroundColor:[
+
+"#C58AF9",
+
+"#F28BB5",
+
+"#FFD97D",
+
+"#9EE493",
+
+"#8EC5FC"
+
+]
+
+
+}
+
+]
+
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+
+}
+
+);
+
+
+
+}
+
+
+
+
+
+// Load analytics when page opens
+
+window.addEventListener(
+"load",
+()=>{
+
+loadAnalytics();
+
+});
+// =====================================
+// AI CHAT ASSISTANT
+// =====================================
+
+
+let chatHistory=[];
+
+
+
+async function sendMessage(){
+
+
+const input =
+document.getElementById("chat-input");
+
+
+const message =
+input.value.trim();
+
+
+
+if(!message){
+
+return;
+
+}
+
+
+
+addMessage(
+message,
+"user"
+);
+
+
+
+input.value="";
+
+
+
+chatHistory.push({
+
+role:"user",
+
+content:message
+
+});
+
+
+
+try{
+
+
+const response =
+await fetch(
+"/api/chat",
+{
+
+
+method:"POST",
+
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+messages:chatHistory
+
+})
+
+
+}
+
+);
+
+
+
+const data =
+await response.json();
+
+
+
+
+
+addMessage(
+data.reply,
+"bot"
+);
+
+
+
+chatHistory.push({
+
+role:"assistant",
+
+content:data.reply
+
+});
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.error(error);
+
+
+addMessage(
+"Sorry, I am unable to respond right now.",
+"bot"
+);
+
+
+}
+
+
+
+}
+
+
+
+
+function addMessage(text,type){
+
+
+const box =
+document.getElementById(
+"chat-messages"
+);
+
+
+
+const message =
+document.createElement("div");
+
+
+
+message.className =
+type==="user"
+?
+"user-message"
+:
+"bot-message";
+
+
+
+message.innerText=text;
+
+
+
+box.appendChild(message);
+
+
+
+box.scrollTop =
+box.scrollHeight;
+
+
+}
+
+
+
+
+
+// =====================================
+// EDUCATIONAL LIBRARY
+// =====================================
+
+
+function showArticle(topic){
+
+
+const box =
+document.getElementById(
+"article-box"
+);
+
+
+const title =
+document.getElementById(
+"article-title"
+);
+
+
+const text =
+document.getElementById(
+"article-text"
+);
+
+
+
+
+
+const articles={
+
+
+pcos:{
+
+
+title:
+"🌸 What is PCOS?",
+
+
+text:
+"Polycystic ovary syndrome is a hormonal condition that can affect ovulation, menstrual cycles, androgen levels, and metabolism. Symptoms vary widely between individuals."
+
+},
+
+
+
+hormones:{
+
+
+title:
+"🧬 Hormones and PCOS",
+
+
+text:
+"PCOS may involve changes in hormones such as insulin and androgens. These changes can contribute to symptoms like irregular cycles, acne, or increased hair growth."
+
+},
+
+
+
+lifestyle:{
+
+
+title:
+"🥗 Lifestyle Support",
+
+
+text:
+"Regular physical activity, balanced nutrition, stress management, and consistent sleep patterns may support overall health and wellbeing."
+
+},
+
+
+
+diagnosis:{
+
+
+title:
+"🩺 Diagnosis and Treatment",
+
+
+text:
+"Healthcare providers typically consider symptoms, medical history, laboratory tests, and imaging when evaluating PCOS."
+
+}
+
+
+};
+
+
+
+
+title.innerText =
+articles[topic].title;
+
+
+
+text.innerText =
+articles[topic].text;
+
+
+
+box.style.display="block";
+
+
+}
+
+</script>
+
+
+</body>
+
+</html>
