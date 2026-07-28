@@ -2,6 +2,7 @@
 import os
 import threading
 import webbrowser
+from pathlib import Path
 import pandas as pd
 from datetime import datetime
 from fastapi import FastAPI, HTTPException
@@ -18,6 +19,7 @@ from predict import predict_pcos_risk
 # Load environment variables (.env file)
 load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent
 app = FastAPI(title="PCOS-AI Backend API")
 
 # Enable CORS for local HTML/JS frontend calls
@@ -113,14 +115,14 @@ class RiskAssessmentRequest(BaseModel):
     profile: ProfileData
 
 class SymptomEntry(BaseModel):
-    period_start: str
-    period_end: str
-    pain: int
-    acne: str
-    mood: str
-    energy: int
-    weight: float
-    sleep: float
+    period_start: str = ""
+    period_end: str = ""
+    pain: int = 0
+    acne: str = "none"
+    mood: str = "neutral"
+    energy: int = 0
+    weight: Optional[float] = None
+    sleep: float = 0
     medication: str = ""
     notes: str = ""
 
@@ -139,12 +141,17 @@ class ChatRequest(BaseModel):
 @app.get("/")
 def serve_landing_page():
     """Serves the main landing page directly upon startup."""
-    return FileResponse("landing.html")
+    return FileResponse(str(BASE_DIR / "landing.html"))
 
 @app.get("/app")
 def serve_app_page():
     """Serves the main application dashboard (index.html)."""
-    return FileResponse("index.html")
+    return FileResponse(str(BASE_DIR / "index.html"))
+
+@app.get("/health")
+def health_check():
+    """Simple health endpoint for deployment platforms."""
+    return {"status": "ok"}
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
@@ -331,14 +338,17 @@ def chat_assistant(request: ChatRequest):
 # =========================================================
 
 def open_browser():
-    """Opens the landing page in default web browser once server is live."""
+    """Opens the landing page in a local browser when running locally."""
+    if os.getenv("RENDER") or os.getenv("PORT"):
+        return
     webbrowser.open_new("http://127.0.0.1:8000/")
 
 if __name__ == "__main__":
     import uvicorn
-    
-    # Schedule browser launch after server initialization
+
+    # Schedule browser launch after server initialization for local runs
     threading.Timer(1.2, open_browser).start()
-    
-    # Run Uvicorn ASGI server
-    uvicorn.run("app2:app", host="127.0.0.1", port=8000, reload=True)
+
+    # Run Uvicorn ASGI server with Render-friendly host/port settings
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=False)

@@ -1,11 +1,14 @@
+from pathlib import Path
 import joblib
 import pandas as pd
 
 
+BASE_DIR = Path(__file__).resolve().parent
+
 # Load saved model files
-model = joblib.load("pcos_risk_model.pkl")
-features = joblib.load("model_features.pkl")
-importance_df = joblib.load("feature_importance.pkl")
+model = joblib.load(BASE_DIR / "pcos_risk_model.pkl")
+features = joblib.load(BASE_DIR / "model_features.pkl")
+importance_df = joblib.load(BASE_DIR / "feature_importance.pkl")
 
 
 def predict_pcos_risk(user_data):
