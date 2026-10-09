@@ -55,7 +55,6 @@
 /* ==========================
    DARK MODE
 ========================== */
-
 body.dark{
 
     --background:#17141F;
@@ -70,18 +69,12 @@ body.dark{
 }
 body.lavender{
 
-    --primary:#B56BFF;
-
-    --primary-dark:#8444D8;
-
     --background:#FFF4FF;
-
     --background2:#EEDCFF;
 
     --text:#43285F;
 
-    --glass:
-    rgba(255,245,255,.45);
+    --glass:rgba(255,245,255,.45);
 
 }
 /* ==========================
@@ -365,8 +358,8 @@ body::after{
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.55),
-            rgba(215,180,255,.45)
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:var(--primary-dark);
@@ -503,7 +496,7 @@ body::after{
         scale(1.02);
 
     box-shadow:
-        0 25px 55px rgba(167,107,235,.22);
+        0 25px 55px var(--shadow-color);
 
 }
 
@@ -532,7 +525,53 @@ body::after{
     margin:15px 0;
 
 }
+.color-picker{
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-top:15px;
+
+}
+
+.color-picker label{
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.color-picker input[type="color"]{
+
+    width:70px;
+
+    height:70px;
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+.color-picker input[type="color"]:hover{
+
+    transform:scale(1.08);
+
+}
 /* ==========================
    QUICK ACTION BUTTONS
 ========================== */
@@ -568,12 +607,12 @@ body::after{
     background:
         linear-gradient(
             135deg,
-            #D19BFF,
-            #A76BEB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     box-shadow:
-        0 12px 30px rgba(167,107,235,.35);
+        0 12px 30px var(--shadow-color);
 
     transition:var(--transition);
 
@@ -586,7 +625,7 @@ body::after{
         translateY(-5px);
 
     box-shadow:
-        0 18px 40px rgba(167,107,235,.5);
+        0 18px 40px var(--shadow-color);
 
 }
 
@@ -753,7 +792,7 @@ button:active::after{
     box-shadow:
 
         0 0 0 5px
-        rgba(167,107,235,.15);
+        var(--shadow-color);
 
 }
 
@@ -857,14 +896,14 @@ input[type="range"]{
 
         linear-gradient(
             135deg,
-            #C58AF9,
-            #F7A8D8
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     box-shadow:
 
         0 20px 45px
-        rgba(167,107,235,.35);
+        var(--shadow-color);
 
     animation:pulse 3s infinite;
 
@@ -970,8 +1009,8 @@ input[type="range"]{
 
         linear-gradient(
             135deg,
-            #C58AF9,
-            #A76BEB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:white;
@@ -1089,8 +1128,8 @@ input[type="range"]{
 
         linear-gradient(
             135deg,
-            rgba(255,255,255,.7),
-            rgba(238,219,255,.7)
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:var(--primary-dark);
@@ -1099,7 +1138,7 @@ input[type="range"]{
 
     box-shadow:
 
-        0 5px 15px rgba(167,107,235,.15);
+        0 5px 15px var(--shadow-color);
 }
 
 /* ==========================
@@ -1137,7 +1176,7 @@ input[type="range"]{
     box-shadow:
 
         0 15px 35px
-        rgba(167,107,235,.18);
+        var(--shadow-color);
 
 }
 
@@ -1178,8 +1217,8 @@ input[type="range"]{
 
         linear-gradient(
             135deg,
-            #FFD9E8,
-            #FFC1DB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:#8B4765;
@@ -1195,7 +1234,7 @@ input[type="range"]{
     box-shadow:
 
         0 10px 20px
-        rgba(255,130,170,.25);
+        var(--shadow-color);
 
 }
 
@@ -1303,8 +1342,8 @@ canvas{
 
         linear-gradient(
             135deg,
-            #D19BFF,
-            #A76BEB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:white;
@@ -1312,7 +1351,7 @@ canvas{
     box-shadow:
 
         0 10px 25px
-        rgba(167,107,235,.35);
+        var(--shadow-color);
 
     animation:
 
@@ -1421,8 +1460,8 @@ canvas{
 
         linear-gradient(
             135deg,
-            #C58AF9,
-            #A76BEB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     color:white;
@@ -1580,14 +1619,14 @@ canvas{
 
         linear-gradient(
             135deg,
-            #D19BFF,
-            #A76BEB
+            var(--gradient-start),
+            var(--gradient-end)
         );
 
     box-shadow:
 
         0 15px 35px
-        rgba(167,107,235,.45);
+        var(--shadow-color);
 
     animation:
 
@@ -1641,7 +1680,7 @@ canvas{
     box-shadow:
 
         0 15px 35px
-        rgba(0,0,0,.15);
+        var(--shadow-color);
 
     animation:
 
@@ -1678,6 +1717,7 @@ canvas{
    PART 4
    POLISH + THEMES + ACHIEVEMENTS + RESPONSIVE
 ====================================================== */
+
 
 /* ==========================
    THEME SWITCHER
@@ -1769,15 +1809,12 @@ canvas{
     border-radius:30px;
 
     text-align:center;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.45),
-            rgba(238,219,255,.35)
-        );
-
+    background:linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+);
+    
     backdrop-filter:blur(20px);
 
     border:
@@ -1876,13 +1913,11 @@ canvas{
 
     font-size:32px;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            #FFD6EC,
-            #D5B1FF
-        );
+    background:linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+    );
 
 }
 
@@ -1962,13 +1997,11 @@ canvas{
 
     justify-content:center;
 
-    background:
-
-        linear-gradient(
-            135deg,
-            #FFF8FD,
-            #F3E7FF
-        );
+    background:linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
 
     z-index:9999;
 
@@ -2076,10 +2109,10 @@ canvas{
     box-shadow:
 
         0 0 25px
-        rgba(167,107,235,.35),
+        var(--shadow-color),
 
         0 0 60px
-        rgba(197,138,249,.2);
+        var(--shadow-color);
 
 }
 
@@ -2268,7 +2301,7 @@ select:focus{
     box-shadow:
 
         0 0 0 4px
-        rgba(167,107,235,.25);
+        var(--shadow-color);
 
 }
 
@@ -2278,12 +2311,11 @@ select:focus{
 
 .text-gradient{
 
-    background:
-        linear-gradient(
-            135deg,
-            #A76BEB,
-            #F29AC5
-        );
+    background:linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
 
     background-clip:text;
     -webkit-background-clip:text;
@@ -2313,6 +2345,149 @@ select:focus{
 
     border-radius:30px;
 
+}
+
+.library-controls{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+#library-search{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    border:2px solid var(--primary-light);
+
+    background:var(--glass);
+
+    color:var(--text);
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+#library-search:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 15px var(--shadow-color);
+
+}
+.progress-bar{
+
+    width:100%;
+
+    height:16px;
+
+    background:var(--background2);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:15px 0;
+
+}
+
+#progress-fill{
+
+    width:0%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    transition:.5s;
+
+}
+
+.badge-achievement{
+
+    display:inline-block;
+
+    margin:6px;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    background:var(--primary-light);
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+#recent-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.recent-item{
+
+    margin:4px;
+
+}
+
+.resource-item {
+    margin: 16px 0;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.resource-type {
+    margin: 0 0 6px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.resource-link {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.resource-link:hover {
+    text-decoration: underline;
+}
+
+.resource-description {
+    margin: 8px 0 0;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.library-hidden {
+    display: none !important;
 }
 
 </style>
@@ -2394,6 +2569,39 @@ select:focus{
         </button>
 
     </div>
+    <!-- LOGGED-IN ACCOUNT -->
+    <div
+        id="account-panel"
+        style="margin-top:24px; padding:14px; border-radius:16px;
+            background:rgba(255,255,255,.35);"
+    >
+        <div style="font-size:12px; color:var(--text-light);">
+            Logged in as
+        </div>
+
+        <div
+            id="account-name"
+            style="font-weight:700; margin-top:5px; overflow-wrap:anywhere;"
+        >
+            Loading...
+        </div>
+
+        <div
+            id="account-email"
+            style="font-size:12px; margin-top:4px; overflow-wrap:anywhere;"
+        ></div>
+
+        <button
+            type="button"
+            onclick="logoutUser()"
+            style="margin-top:12px; padding:9px 12px; width:100%;
+                border:1px solid #D9C5F3; border-radius:10px;
+                background:rgba(255,255,255,.5); color:var(--text);
+                cursor:pointer;"
+        >
+            Log Out
+        </button>
+    </div>
 
     <!-- THEME SWITCHER -->
 
@@ -2445,6 +2653,28 @@ select:focus{
 <section 
 id="dashboard"
 class="page active">
+<div class="card glass">
+
+    <h3>🎨 Personalize</h3>
+
+    <p class="muted">
+        Choose your favorite accent color.
+    </p>
+
+    <div class="color-picker">
+
+        <label for="color-picker">
+            Accent Color
+        </label>
+
+        <input
+            type="color"
+            id="color-picker"
+            value="#B56BFF">
+
+    </div>
+
+</div>
 
 <div class="welcome glass">
 
@@ -3869,18 +4099,6 @@ Visualize symptom patterns, lifestyle trends, and wellness changes.
 
 <div class="card glass">
 
-<div class="color-picker">
-
-<label>
-Choose Accent Color
-</label>
-
-<input 
-type="color"
-id="color-picker"
-value="#B56BFF">
-
-</div>
 
 <h3>
 🌙 Average Sleep
@@ -4099,203 +4317,358 @@ Learn about PCOS, hormones, lifestyle habits, and wellness support.
 
 
 </div>
+<div class="card glass" id="continue-reading-card" style="display:none;">
 
+    <h3>📖 Continue Reading</h3>
 
+    <p id="continue-title"></p>
 
+    <button
+        class="library-btn"
+        id="continue-button">
 
+        Continue Reading →
 
-
-
-
-
-<div class="summary">
-
-
-
-
-
-<div class="card glass">
-
-
-<h3>
-🌸 Understanding PCOS
-</h3>
-
-
-<p>
-
-Learn about PCOS symptoms, hormones, and common health patterns.
-
-</p>
-
-
-
-<button
-class="library-btn"
-onclick="showArticle('pcos')">
-
-Read More
-
-</button>
-
+    </button>
 
 </div>
 
+<div class="library-controls glass">
 
+    <input
+        type="text"
+        id="library-search"
+        placeholder="🔍 Search articles...">
 
+    <div class="library-filters">
 
+        <button class="filter-btn active" data-filter="all">
+            📚 All
+        </button>
 
+        <button class="filter-btn" data-filter="basics">
+            🌸 Basics
+        </button>
 
+        <button class="filter-btn" data-filter="wellness">
+            🥗 Wellness
+        </button>
 
+        <button class="filter-btn" data-filter="treatment">
+            🩺 Treatment
+        </button>
 
-<div class="card glass">
+        <button class="filter-btn" data-filter="support">
+            ❤️ Support
+        </button>
 
+    </div>
 
-<h3>
-🧬 Hormones & PCOS
-</h3>
+</div>
+<div
+class="card glass"
+id="favorites-section"
+style="display:none;">
 
+    <h3>⭐ Favorite Articles</h3>
 
-<p>
+    <div id="favorite-list">
 
-Explore how hormones can influence symptoms and cycles.
-
-</p>
-
-
-
-<button
-class="library-btn"
-onclick="showArticle('hormones')">
-
-Read More
-
-</button>
-
+    </div>
 
 </div>
 
+<div class="card glass" id="progress-card">
 
+    <h3>📚 Your Learning Progress</h3>
 
+    <div class="progress-bar">
 
+        <div id="progress-fill"></div>
 
+    </div>
 
+    <p id="progress-text">
+        0 of 4 articles completed
+    </p>
 
+    <div id="achievement-list">
 
-<div class="card glass">
+    </div>
 
+</div>
+<div
+class="card glass"
+id="recent-section">
 
-<h3>
-🥗 Lifestyle Support
-</h3>
+    <h3>🕒 Recently Viewed</h3>
 
+    <div id="recent-list">
 
-<p>
-
-Explore nutrition, movement, sleep, and stress management.
-
-</p>
-
-
-
-<button
-class="library-btn"
-onclick="showArticle('lifestyle')">
-
-Read More
-
-</button>
-
+    </div>
 
 </div>
 
+<div
+    class="summary"
+    id="library-grid">
 
+    <!-- PCOS -->
 
+    <div
+        class="card glass library-card"
+        data-category="basics"
+        data-search="pcos symptoms diagnosis periods fertility insulin hormones weight acne">
+        <span class="badge beginner">
+            Beginner
+        </span>
 
+        <h3>
+            🌸 Understanding PCOS
+        </h3>
 
+        <p class="reading-time">
+            📖 6 min read
+        </p>
 
+        <p>
 
+            Learn what PCOS is, common symptoms,
+            possible causes, long-term health risks,
+            and why early management is important.
 
-<div class="card glass">
+        </p>
 
+        <ul>
 
-<h3>
-🩺 Diagnosis & Care
-</h3>
+            <li>✓ Symptoms</li>
 
+            <li>✓ Causes</li>
 
-<p>
+            <li>✓ Diagnosis</li>
 
-Understand how healthcare providers evaluate PCOS.
+            <li>✓ Treatments</li>
 
-</p>
+        </ul>
 
+        <button
+            class="library-btn"
+            onclick="showArticle('pcos')">
 
+            Read Article →
 
-<button
-class="library-btn"
-onclick="showArticle('diagnosis')">
+        </button>
 
-Read More
+    </div>
 
-</button>
+    <!-- Hormones -->
 
+    <div
+        class="card glass library-card"
+        data-category="basics"
+        data-search="hormones insulin testosterone estrogen lh fsh amh ovulation">
+        <span class="badge intermediate">
+            Intermediate
+        </span>
+
+        <h3>
+            🧬 Hormones & PCOS
+        </h3>
+
+        <p class="reading-time">
+
+            📖 5 min read
+
+        </p>
+
+        <p>
+
+            Understand insulin resistance,
+            testosterone, estrogen,
+            LH and FSH hormones.
+
+        </p>
+
+        <ul>
+
+            <li>✓ Hormones</li>
+
+            <li>✓ Insulin</li>
+
+            <li>✓ Testosterone</li>
+
+            <li>✓ Menstrual Cycles</li>
+
+        </ul>
+
+        <button
+            class="library-btn"
+            onclick="showArticle('hormones')">
+
+            Read Article →
+
+        </button>
+
+    </div>
+
+    <!-- Lifestyle -->
+
+    <div
+    class="card glass library-card"
+    data-category="wellness"
+    data-search="nutrition exercise sleep stress healthy diet movement lifestyle">
+        <span class="badge beginner">
+            Beginner
+        </span>
+
+        <h3>
+            🥗 Lifestyle Support
+        </h3>
+
+        <p class="reading-time">
+
+            📖 8 min read
+
+        </p>
+
+        <p>
+
+            Explore healthy nutrition,
+            movement, sleep,
+            stress management,
+            and sustainable habits.
+
+        </p>
+
+        <ul>
+
+            <li>✓ Nutrition</li>
+
+            <li>✓ Exercise</li>
+
+            <li>✓ Sleep</li>
+
+            <li>✓ Stress</li>
+
+        </ul>
+
+        <button
+            class="library-btn"
+            onclick="showArticle('lifestyle')">
+
+            Read Article →
+
+        </button>
+
+    </div>
+
+    <!-- Diagnosis -->
+
+    <div
+        class="card glass library-card"
+        data-category="treatment"
+        data-search="doctor diagnosis ultrasound blood tests healthcare treatment">
+        <span class="badge beginner">
+            Beginner
+        </span>
+
+        <h3>
+
+            🩺 Diagnosis & Care
+
+        </h3>
+
+        <p class="reading-time">
+
+            📖 7 min read
+
+        </p>
+
+        <p>
+
+            Learn how PCOS is diagnosed,
+            which tests may be used,
+            and how healthcare providers
+            develop treatment plans.
+
+        </p>
+
+        <ul>
+
+            <li>✓ Blood Tests</li>
+
+            <li>✓ Ultrasound</li>
+
+            <li>✓ Diagnosis</li>
+
+            <li>✓ Care Plans</li>
+
+        </ul>
+
+        <button
+            class="library-btn"
+            onclick="showArticle('diagnosis')">
+
+            Read Article →
+
+        </button>
+
+    </div>
 
 </div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
 
 <div
 id="article-box"
-class="tip glass"
+class="card glass article-view"
 style="display:none;">
 
+    <h2 id="article-title"></h2>
 
+    <button
+        class="library-btn"
+        id="favorite-button">
 
-<h2
-id="article-title">
+        ⭐ Save Article
 
-</h2>
+    </button>
+    <button
+        class="library-btn"
+        id="complete-button">
 
+        ✅ Mark as Read
 
+    </button>
 
+    <p
+        class="reading-time"
+        id="article-reading">
+    </p>
 
-<p
-id="article-text">
+    <div id="article-preview"></div>
 
-</p>
+    <hr>
 
+    <div id="article-text"></div>
 
+    <hr>
 
+    <h3>
+        📌 Key Takeaways
+    </h3>
+
+    <ul id="article-takeaways">
+    </ul>
+
+    <h3>
+        🌐 Trusted Resources
+    </h3>
+
+    <div id="article-links">
+    </div>
 
 </div>
 
-
-
-
-
-
 </section>
-
-
-
-
-
-
-
 
 
 <!-- ==========================
@@ -4698,7 +5071,11 @@ function exists(id){
    THEME SYSTEM
 ========================== */
 
+let accent = {
 
+    color:"#B56BFF"
+
+};
 const THEMES = {
 
     light:"",
@@ -4746,15 +5123,12 @@ function initializeTheme(){
 }
 
 
-
 function applyTheme(theme){
-
 
     document.body.classList.remove(
         "dark",
         "lavender"
     );
-
 
     if(theme !== "light"){
 
@@ -4762,16 +5136,14 @@ function applyTheme(theme){
 
     }
 
-
     localStorage.setItem(
         "theme",
         theme
     );
 
-
-
     updateActiveThemeButton(theme);
 
+    applyAccentColor(accent.color);
 
 }
 /* ==========================
@@ -4789,16 +5161,15 @@ function initializeColorPicker(){
     }
 
 
-    const savedColor =
+    accent.color =
     localStorage.getItem("accentColor")
     ||
     "#B56BFF";
 
 
-    picker.value = savedColor;
+    picker.value = accent.color;
 
-
-    applyAccentColor(savedColor);
+    applyAccentColor(accent.color);
 
 
 
@@ -4806,8 +5177,10 @@ function initializeColorPicker(){
         "input",
         ()=>{
 
+            accent.color = picker.value;
+
             applyAccentColor(
-                picker.value
+            accent.color
             );
 
         }
@@ -4816,29 +5189,48 @@ function initializeColorPicker(){
 }
 
 
-
 function applyAccentColor(color){
 
+    accent.color = color;
 
-    document.documentElement
-    .style
-    .setProperty(
+    document.documentElement.style.setProperty(
         "--primary",
         color
     );
 
+    document.documentElement.style.setProperty(
+        "--primary-dark",
+        darken(color,30)
+    );
+
+    document.documentElement.style.setProperty(
+        "--primary-light",
+        lighten(color,40)
+    );
+
+    document.documentElement.style.setProperty(
+        "--gradient-start",
+        color
+    );
+
+    document.documentElement.style.setProperty(
+        "--gradient-end",
+        lighten(color,20)
+    );
+
+    document.documentElement.style.setProperty(
+        "--shadow-color",
+        hexToRGBA(color,.25)
+    );
 
     localStorage.setItem(
         "accentColor",
         color
     );
 
-
     updateTextContrast(color);
 
 }
-
-
 
 
 function updateTextContrast(color){
@@ -4907,6 +5299,46 @@ function hexToRGB(hex){
 
 }
 
+function lighten(hex, amount){
+
+    let num = parseInt(hex.substring(1),16);
+
+    let r = Math.min(255,(num>>16)+amount);
+
+    let g = Math.min(255,((num>>8)&255)+amount);
+
+    let b = Math.min(255,(num&255)+amount);
+
+    return "#"+(
+        (1<<24)+(r<<16)+(g<<8)+b
+    ).toString(16).slice(1);
+
+}
+
+function darken(hex, amount){
+
+    let num = parseInt(hex.substring(1),16);
+
+    let r = Math.max(0,(num>>16)-amount);
+
+    let g = Math.max(0,((num>>8)&255)-amount);
+
+    let b = Math.max(0,(num&255)-amount);
+
+    return "#"+(
+        (1<<24)+(r<<16)+(g<<8)+b
+    ).toString(16).slice(1);
+
+}
+
+function hexToRGBA(hex,opacity){
+
+    const rgb = hexToRGB(hex);
+
+    return `rgba(${rgb.r},${rgb.g},${rgb.b},${opacity})`;
+
+}
+
 
 function updateActiveThemeButton(theme){
 
@@ -4951,11 +5383,12 @@ style.textContent = `
 
 body.lavender{
 
-    --background:#FFF4FF;
-    --background2:#EEDCFF;
-
     --primary:#B56BFF;
     --primary-dark:#8444D8;
+    --primary-light:#EFD9FF;
+
+    --gradient-start:var(--primary);
+    --gradient-end:var(--primary-light);
 
 }
 
@@ -5459,6 +5892,337 @@ function initializeAnimations(){
 
     });
 
+
+}
+
+function initializeLibrarySearch() {
+    const search = document.getElementById("library-search");
+
+    if (!search) {
+        return;
+    }
+
+    // Prevent duplicate event listeners.
+    if (search.dataset.searchInitialized === "true") {
+        return;
+    }
+
+    search.dataset.searchInitialized = "true";
+
+    // Search as the user types.
+    search.addEventListener("input", filterLibrary);
+
+    // Filter articles when a category button is clicked.
+    document.querySelectorAll(".filter-btn").forEach(function(button) {
+        button.addEventListener("click", function() {
+            document.querySelectorAll(".filter-btn").forEach(function(item) {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+            filterLibrary();
+        });
+    });
+
+    filterLibrary();
+}
+
+
+function filterLibrary() {
+    const search = document.getElementById("library-search");
+
+    if (!search) {
+        return;
+    }
+
+    const searchText = search.value.trim().toLowerCase();
+
+    const activeButton = document.querySelector(".filter-btn.active");
+    const activeFilter = activeButton
+        ? activeButton.dataset.filter
+        : "all";
+
+    let visible = 0;
+
+    document.querySelectorAll(".library-card").forEach(function(card) {
+        const category = card.dataset.category || "";
+        const keywords = (card.dataset.search || "").toLowerCase();
+
+        const heading = card.querySelector("h3");
+        const title = heading ? heading.innerText.toLowerCase() : "";
+        const text = card.innerText.toLowerCase();
+
+        const matchesSearch =
+            keywords.includes(searchText) ||
+            title.includes(searchText) ||
+            text.includes(searchText);
+
+        const matchesFilter =
+            activeFilter === "all" || category === activeFilter;
+
+        if (matchesSearch && matchesFilter) {
+            card.classList.remove("library-hidden");
+            visible++;
+        } else {
+            card.classList.add("library-hidden");
+        }
+    });
+
+    const emptyMessage = document.getElementById("library-empty");
+
+    if (emptyMessage) {
+        emptyMessage.style.display = visible === 0 ? "block" : "none";
+    }
+}
+function updateContinueReading(){
+
+    const card =
+        document.getElementById(
+            "continue-reading-card"
+        );
+
+    const title =
+        document.getElementById(
+            "continue-title"
+        );
+
+    const button =
+        document.getElementById(
+            "continue-button"
+        );
+
+    if(!card || !title || !button){
+
+        return;
+
+    }
+
+    const lastArticle =
+        localStorage.getItem("lastArticle");
+
+    if(!lastArticle){
+
+        card.style.display = "none";
+        return;
+
+    }
+
+    card.style.display = "block";
+
+    title.innerText =
+        articles[lastArticle].title;
+
+    button.onclick = ()=>{
+
+        showArticle(lastArticle);
+
+    };
+
+}
+function markArticleRead(){
+
+    if(!currentArticle){
+
+        return;
+
+    }
+
+    let completed =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "completedArticles"
+
+            )
+
+        ) || [];
+
+    if(
+
+        !completed.includes(currentArticle)
+
+    ){
+
+        completed.push(currentArticle);
+
+    }
+
+    localStorage.setItem(
+
+        "completedArticles",
+
+        JSON.stringify(completed)
+
+    );
+
+    updateProgress();
+
+}
+function updateProgress(){
+
+    const completed =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "completedArticles"
+
+            )
+
+        ) || [];
+
+    const total =
+
+        Object.keys(articles).length;
+
+    const percent =
+
+        (completed.length/total)*100;
+
+    document
+
+        .getElementById(
+
+            "progress-fill"
+
+        )
+
+        .style.width =
+
+        percent + "%";
+
+    document
+
+        .getElementById(
+
+            "progress-text"
+
+        )
+
+        .innerText =
+
+        completed.length +
+
+        " of " +
+
+        total +
+
+        " articles completed";
+
+    updateAchievements();
+
+}
+function updateLibraryAchievements(){
+
+    const completed =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "completedArticles"
+
+            )
+
+        ) || [];
+
+    const box =
+
+        document.getElementById(
+
+            "achievement-list"
+
+        );
+
+    if(!box){
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    if(completed.length>=1){
+
+        box.innerHTML +=
+
+        '<span class="badge-achievement">🏅 First Article</span>';
+
+    }
+
+    if(completed.length>=3){
+
+        box.innerHTML +=
+
+        '<span class="badge-achievement">📚 PCOS Learner</span>';
+
+    }
+
+    if(completed.length>=Object.keys(articles).length){
+
+        box.innerHTML +=
+
+        '<span class="badge-achievement">🎓 Library Expert</span>';
+
+    }
+
+}
+function updateRecentlyViewed(){
+
+    const container =
+
+        document.getElementById(
+
+            "recent-list"
+
+        );
+
+    if(!container){
+
+        return;
+
+    }
+
+    let recent =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "recentArticles"
+
+            )
+
+        ) || [];
+
+    container.innerHTML="";
+
+    recent.forEach(article=>{
+
+        const button =
+
+            document.createElement("button");
+
+        button.className=
+
+            "library-btn recent-item";
+
+        button.innerText=
+
+            articles[article].title;
+
+        button.onclick=()=>{
+
+            showArticle(article);
+
+        };
+
+        container.appendChild(button);
+
+    });
 
 }
 /* ======================================================
@@ -6694,7 +7458,7 @@ function renderHistory(entries){
     [...entries]
     .reverse()
     .forEach(
-        (entry,index)=>{
+        (entry)=>{
 
 
             const card =
@@ -6748,7 +7512,7 @@ function renderHistory(entries){
 
             <button
             class="delete-btn"
-            data-index="${index}"
+            data-index="${entry.id}"
             >
             Delete
             </button>
@@ -6765,7 +7529,7 @@ function renderHistory(entries){
                 "click",
                 ()=>{
 
-                    deleteSymptom(index);
+                    deleteSymptom(entry.id);
 
                 }
             );
@@ -6792,56 +7556,32 @@ function renderHistory(entries){
 ========================== */
 
 
-async function deleteSymptom(index){
-
-
-    try{
-
-
-        const response =
-        await fetch(
-            `/api/tracker/${index}`,
+async function deleteSymptom(entryId) {
+    try {
+        const response = await fetch(
+            `/api/tracker/${entryId}`,
             {
-
-                method:"DELETE"
-
+                method: "DELETE",
+                credentials: "same-origin"
             }
         );
 
-
-
-        if(!response.ok){
-
-            throw new Error();
-
+        if (!response.ok) {
+            throw new Error("Unable to delete entry.");
         }
 
-
-
-        showToast(
-            "Entry deleted"
-        );
-
-
-        loadHistory();
-
-
-    }
-
-    catch(error){
-
+        showToast("Entry deleted");
+        await loadHistory();
+        await loadAnalytics();
+    } catch (error) {
+        console.error(error);
 
         showToast(
             "Could not delete entry.",
             "error"
         );
-
-
     }
-
-
 }
-
 
 
 
@@ -7062,14 +7802,18 @@ function createCharts(entries){
                 {
                     label:"Sleep",
                     data:sleep,
-                    borderColor:"#A76BEB",
+                    borderColor:getComputedStyle(
+                    document.documentElement
+                    ).getPropertyValue("--primary"),
                     tension:.4
                 },
 
                 {
                     label:"Pain",
                     data:pain,
-                    borderColor:"#F28BB5",
+                    borderColor:getComputedStyle(
+                    document.documentElement
+                    ).getPropertyValue("--secondary"),
                     tension:.4
                 }
 
@@ -7115,7 +7859,9 @@ function createCharts(entries){
                 {
                     label:"Energy",
                     data:energy,
-                    backgroundColor:"#C58AF9"
+                    backgroundColor:getComputedStyle(
+                    document.documentElement
+                    ).getPropertyValue("--tertiary")
                 }
 
                 ]
@@ -7157,10 +7903,10 @@ function createCharts(entries){
                         {
                             data:Object.values(moods),
                             backgroundColor:[
-                                "#B56BFF",
-                                "#F28BB5",
-                                "#6BCBFF",
-                                "#FFD166"
+                                getComputedStyle(document.documentElement).getPropertyValue("--primary"),
+                                getComputedStyle(document.documentElement).getPropertyValue("--secondary"),
+                                getComputedStyle(document.documentElement).getPropertyValue("--tertiary"),
+                                getComputedStyle(document.documentElement).getPropertyValue("--quaternary")
                             ]
                         }
                     ]
@@ -7588,161 +8334,354 @@ function clearChat(){
    EDUCATIONAL LIBRARY
 ========================== */
 
-
 const articles = {
+    pcos: {
+        title: "Understanding PCOS",
+        readTime: "6 min read",
+        preview: "Learn what PCOS is, its common symptoms, and how it can affect health.",
 
+        content: `
+            <h3>What is PCOS?</h3>
+            <p>Polycystic ovary syndrome (PCOS) is a complex hormonal condition that can affect menstrual cycles, hormone levels, skin, hair growth, and metabolism. Symptoms vary from person to person.</p>
 
-    pcos:{
+            <h3>Common symptoms</h3>
+            <ul>
+                <li>Irregular or missed menstrual periods</li>
+                <li>Acne or increased facial and body hair</li>
+                <li>Thinning hair on the scalp</li>
+                <li>Changes in insulin sensitivity or blood sugar regulation</li>
+                <li>Difficulty predicting ovulation</li>
+            </ul>
 
-        title:
-        "🌸 What is PCOS?",
+            <h3>Why understanding PCOS matters</h3>
+            <p>PCOS can affect several aspects of health. Learning about the condition can help people prepare questions for healthcare professionals and understand the care options available to them.</p>
 
-        text:
-        "PCOS is a hormonal condition that can affect ovulation, menstrual cycles, androgen levels, and metabolism. Symptoms can vary greatly between individuals."
+            <p>Symptoms alone cannot confirm PCOS. A qualified healthcare professional can assess symptoms, medical history, and appropriate tests.</p>
+        `,
 
+        takeaways: [
+            "PCOS can affect several body systems, not only the ovaries.",
+            "Symptoms and their severity differ between individuals.",
+            "A healthcare professional can help evaluate symptoms and care options."
+        ],
+
+        resources: [
+            {
+                type: "Health article",
+                name: "Office on Women's Health: PCOS",
+                description: "An overview of symptoms, diagnosis, treatment, and living with PCOS.",
+                url: "https://womenshealth.gov/a-z-topics/polycystic-ovary-syndrome"
+            },
+            {
+                type: "Medical reference",
+                name: "MedlinePlus: Polycystic Ovary Syndrome",
+                description: "A patient-friendly summary of PCOS and related health information.",
+                url: "https://medlineplus.gov/polycysticovarysyndrome.html"
+            },
+            {
+                type: "Research guideline",
+                name: "2023 International Evidence-Based Guideline",
+                description: "An evidence-based international guideline for assessing and managing PCOS.",
+                url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/"
+            },
+            {
+                type: "Research and health information",
+                name: "NICHD: PCOS",
+                description: "Information from the National Institute of Child Health and Human Development.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos"
+            }
+        ]
     },
 
+    hormones: {
+        title: "Hormones & PCOS",
+        readTime: "7 min read",
+        preview: "Explore how hormones and insulin can be involved in PCOS.",
 
-    hormones:{
+        content: `
+            <h3>Hormones and PCOS</h3>
+            <p>Hormones are chemical messengers that help regulate processes such as menstrual cycles, metabolism, and reproductive function. PCOS is associated with changes in hormonal signaling, although the pattern varies among individuals.</p>
 
-        title:
-        "🧬 Hormones and PCOS",
+            <h3>Androgens</h3>
+            <p>Androgens are hormones present in people of all sexes. Some people with PCOS have elevated androgen levels, which can contribute to acne, increased facial or body hair, or scalp hair thinning.</p>
 
-        text:
-        "Hormones such as insulin and androgens may influence symptoms including irregular cycles, acne, and hair changes."
+            <h3>Insulin and metabolism</h3>
+            <p>Insulin helps the body regulate blood glucose. Some people with PCOS experience insulin resistance, in which the body does not respond to insulin as effectively. This can be associated with changes in blood glucose regulation and other metabolic risks.</p>
 
+            <h3>Individual differences</h3>
+            <p>PCOS does not look the same for everyone. Hormone levels, symptoms, and metabolic health can differ, so evaluation and care should be individualized.</p>
+        `,
+
+        takeaways: [
+            "PCOS can involve changes in androgen levels and insulin sensitivity.",
+            "Not everyone with PCOS experiences the same symptoms.",
+            "Hormone test results need to be interpreted in clinical context."
+        ],
+
+        resources: [
+            {
+                type: "Health information",
+                name: "NICHD: PCOS Condition Information",
+                description: "Explains the condition and its possible effects on the body.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos/conditioninfo"
+            },
+            {
+                type: "Research paper",
+                name: "PLOS Medicine: PCOS Subtypes and Genetic Associations",
+                description: "A 2020 research study exploring different PCOS subtypes and genetic associations.",
+                url: "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003132"
+            },
+            {
+                type: "Research guideline",
+                name: "2023 International Evidence-Based Guideline",
+                description: "Recommendations for evidence-based assessment and management.",
+                url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/"
+            },
+            {
+                type: "Health article",
+                name: "NICHD: PCOS Symptoms",
+                description: "A summary of symptoms that may be associated with PCOS.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos/conditioninfo/symptoms"
+            }
+        ]
     },
 
+    lifestyle: {
+        title: "Lifestyle Support",
+        readTime: "6 min read",
+        preview: "Explore sustainable habits and evidence-based approaches to supporting overall health.",
 
-    lifestyle:{
+        content: `
+            <h3>Lifestyle and PCOS</h3>
+            <p>Everyday habits can support general health and may help some people manage aspects of PCOS. There is no single lifestyle plan that works for everyone, and PCOS is not a personal failure.</p>
 
-        title:
-        "🥗 Lifestyle Support",
+            <h3>Balanced nutrition</h3>
+            <p>Eating a variety of foods can support energy, nutrient needs, and metabolic health. Personal preferences, cultural foods, access to food, and individual health needs should be considered.</p>
 
-        text:
-        "Regular movement, balanced nutrition, stress management, and healthy sleep routines can support overall wellbeing."
+            <h3>Movement and physical activity</h3>
+            <p>Activities a person enjoys can support cardiovascular health, mood, sleep, and overall well-being. Movement does not need to be extreme to be valuable.</p>
 
+            <h3>Sleep and emotional well-being</h3>
+            <p>Sleep and mental health are important parts of overall care. If symptoms, stress, or sleep difficulties affect daily life, consider discussing them with a healthcare professional.</p>
+
+            <h3>Individualized support</h3>
+            <p>Lifestyle approaches are only one part of PCOS care. Medication and other treatments may also be appropriate depending on symptoms and personal goals.</p>
+        `,
+
+        takeaways: [
+            "There is no single lifestyle approach that works for everyone.",
+            "Balanced nutrition, enjoyable movement, and sleep can support overall well-being.",
+            "Lifestyle support does not replace individualized medical care."
+        ],
+
+        resources: [
+            {
+                type: "Health information",
+                name: "NICHD: PCOS Treatments",
+                description: "Describes treatment options that may be considered for PCOS.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos/conditioninfo/treatments"
+            },
+            {
+                type: "Research guideline",
+                name: "2023 International Evidence-Based Guideline",
+                description: "Evidence-based recommendations covering lifestyle and clinical management.",
+                url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/"
+            },
+            {
+                type: "Research paper",
+                name: "Sleep Disturbances and Cardiovascular Risk Factors in PCOS",
+                description: "A systematic review examining research on sleep and cardiovascular risk factors in PCOS.",
+                url: "https://pubmed.ncbi.nlm.nih.gov/36176474/"
+            },
+            {
+                type: "Nutrition resource",
+                name: "Academy of Nutrition and Dietetics",
+                description: "General nutrition information from a professional nutrition organization.",
+                url: "https://www.eatright.org"
+            }
+        ]
     },
 
+    diagnosis: {
+        title: "Diagnosis & Care",
+        readTime: "7 min read",
+        preview: "Learn how PCOS may be evaluated and how to prepare for a healthcare appointment.",
 
-    diagnosis:{
+        content: `
+            <h3>How is PCOS evaluated?</h3>
+            <p>PCOS is evaluated by a healthcare professional using symptoms, medical history, examination when appropriate, and selected tests. Other conditions that can cause similar symptoms may need to be considered.</p>
 
-        title:
-        "🩺 Diagnosis and Care",
+            <h3>What might an appointment involve?</h3>
+            <ul>
+                <li>Discussing menstrual patterns and symptoms</li>
+                <li>Reviewing medical history and medications</li>
+                <li>Considering blood tests where appropriate</li>
+                <li>Discussing whether imaging or other assessments are needed</li>
+            </ul>
 
-        text:
-        "Healthcare professionals usually consider symptoms, history, laboratory tests, and imaging when evaluating PCOS."
+            <h3>Care and treatment</h3>
+            <p>Care depends on symptoms, health needs, and personal goals. A healthcare professional may discuss options for menstrual irregularity, acne, unwanted hair growth, or metabolic concerns.</p>
 
+            <h3>Preparing for an appointment</h3>
+            <p>Writing down questions, symptoms, and relevant changes can help make an appointment more productive. People can ask what tests are being considered and what the results may mean.</p>
+
+            <p>This library provides general education. It cannot diagnose PCOS or determine which treatment is right for an individual.</p>
+        `,
+
+        takeaways: [
+            "PCOS assessment considers symptoms and other possible explanations.",
+            "Testing and care depend on the individual's circumstances.",
+            "A healthcare professional can explain results and discuss available options."
+        ],
+
+        resources: [
+            {
+                type: "Health information",
+                name: "NICHD: Diagnosing PCOS",
+                description: "Explains how healthcare professionals may evaluate PCOS.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos/conditioninfo/diagnose"
+            },
+            {
+                type: "Research guideline",
+                name: "2023 International Evidence-Based Guideline",
+                description: "Detailed clinical recommendations for PCOS assessment and management.",
+                url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/"
+            },
+            {
+                type: "Health article",
+                name: "Office on Women's Health: PCOS",
+                description: "Patient-friendly information about symptoms, diagnosis, and treatment.",
+                url: "https://womenshealth.gov/a-z-topics/polycystic-ovary-syndrome"
+            },
+            {
+                type: "Research information",
+                name: "NICHD: PCOS Research",
+                description: "Information about research related to PCOS.",
+                url: "https://www.nichd.nih.gov/health/topics/pcos/researchinfo"
+            }
+        ]
     }
-
-
 };
-
-
-
 
 
 function showArticle(topic){
 
+    const article = articles[topic];
+    let recent =
 
-    const article =
-    articles[topic];
+    JSON.parse(
 
+    localStorage.getItem(
 
+    "recentArticles"
 
-    if(!article){
+    )
 
-        return;
+    ) || [];
 
-    }
+    recent = recent.filter(
 
+    item=>item!==topic
 
-
-    const box =
-    getElement(
-        "article-box"
     );
 
+    recent.unshift(topic);
 
-    const title =
-    getElement(
-        "article-title"
-    );
-
-
-    const text =
-    getElement(
-        "article-text"
-    );
-
-
-
-    if(
-        box &&
-        title &&
-        text
-    ){
-
-        title.innerText =
-        article.title;
-
-
-        text.innerText =
-        article.text;
-
-
-        box.style.display =
-        "block";
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================
-   ACHIEVEMENT SYSTEM
-========================== */
-
-
-function updateAchievements(){
-
-
-    const visits =
-    Number(
-        localStorage.getItem(
-            "visits"
-        ) || 0
-    ) + 1;
-
-
+    recent = recent.slice(0,5);
 
     localStorage.setItem(
-        "visits",
-        visits
+
+    "recentArticles",
+
+    JSON.stringify(recent)
+
     );
 
+    updateRecentlyViewed();
 
-
-    if(
-        visits === 7
-    ){
-
-        showToast(
-            "🎉 7-day wellness streak unlocked!"
-        );
-
-
+    if(!article){
+        return;
     }
 
+    document.getElementById("article-box").style.display="block";
+
+    document.getElementById("article-title").innerText =
+        article.title;
+
+    document.getElementById("article-reading").innerText =
+        "📖 " + article.readTime;
+
+    document.getElementById("article-preview").innerHTML =
+        "<p>" + article.preview + "</p>";
+
+    document.getElementById("article-text").innerHTML =
+        article.content
+            .trim()
+        .split("\n\n")
+        .map(p=>`<p>${p}</p>`)
+        .join("");
+
+    const takeaways =
+        document.getElementById("article-takeaways");
+
+    takeaways.innerHTML="";
+
+    article.takeaways.forEach(item=>{
+
+        takeaways.innerHTML += `<li>${item}</li>`;
+
+    });
+
+    
+const links = document.getElementById("article-links");
+
+links.innerHTML = "";
+
+article.resources.forEach(resource => {
+    const link = document.createElement("a");
+
+    link.className = "resource-link";
+    link.href = resource.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "🌐 " + resource.name;
+
+    const type = document.createElement("p");
+    type.textContent = resource.type;
+    type.className = "resource-type";
+
+    const description = document.createElement("p");
+    description.textContent = resource.description;
+    description.className = "resource-description";
+
+    const container = document.createElement("div");
+    container.className = "resource-item";
+
+    container.appendChild(type);
+    container.appendChild(link);
+    container.appendChild(description);
+
+    links.appendChild(container);
+    });
+
+    document
+        .getElementById("article-box")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+    document
+
+.getElementById(
+
+"complete-button"
+
+)
+
+.onclick =
+
+markArticleRead;
 
 }
-
-
 
 
 
@@ -7802,6 +8741,66 @@ document.addEventListener(
     }
 );
 
+async function loadCurrentUser() {
+    try {
+        const response = await fetch("/api/auth/me", {
+            credentials: "same-origin"
+        });
+
+        if (response.status === 401) {
+            window.location.replace("/login");
+            return false;
+        }
+
+        if (!response.ok) {
+            throw new Error("Could not verify account.");
+        }
+
+        const user = await response.json();
+
+        document.getElementById("account-name").textContent =
+            user.name;
+
+        document.getElementById("account-email").textContent =
+            user.email;
+
+        return true;
+    } catch (error) {
+        console.error("Account check failed:", error);
+
+        if (typeof showToast === "function") {
+            showToast(
+                "Could not verify your account. Please refresh.",
+                "error"
+            );
+        }
+
+        return false;
+    }
+}
+
+
+async function logoutUser() {
+    try {
+        const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "same-origin"
+        });
+
+        if (!response.ok) {
+            throw new Error("Logout failed.");
+        }
+
+        window.location.replace("/login");
+    } catch (error) {
+        console.error("Logout failed:", error);
+
+        showToast(
+            "Could not log out. Please try again.",
+            "error"
+        );
+    }
+}
 
 
 
@@ -7813,12 +8812,19 @@ document.addEventListener(
 
 window.addEventListener(
     "load",
-    ()=>{
+    async ()=>{
+        initializeLibrarySearch();
+        const authenticated = await loadCurrentUser();
 
+        if (!authenticated) {
+            return;
+        }
 
         updateAchievements();
-
-
+        updateFavorites();
+        updateContinueReading();
+        updateProgress();
+        updateRecentlyViewed();
 
         if(
             typeof loadHistory ===

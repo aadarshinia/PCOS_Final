@@ -24,11 +24,20 @@ def predict_pcos_risk(user_data):
 
     # Add missing model features
     # with safe default values
-    for feature in features:
+    
+# Add all missing model features at once
+    missing_features = [
+        feature for feature in features
+        if feature not in input_df.columns
+    ]
 
-        if feature not in input_df.columns:
-            input_df[feature] = 0
-
+    if missing_features:
+        missing_df = pd.DataFrame(
+            0,
+            index=input_df.index,
+            columns=missing_features
+        )
+        input_df = pd.concat([input_df, missing_df], axis=1)
 
     # Ensure correct feature order
     input_df = input_df[features]

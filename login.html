@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOS Compass | Account</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: Inter, sans-serif;
+            color: #4D425C;
+            background:
+                radial-gradient(circle at top left, #FFE8FF, transparent 45%),
+                radial-gradient(circle at bottom right, #EFD9FF, transparent 45%),
+                linear-gradient(135deg, #FFF8FD, #F5EEFF);
+        }
+
+        .account-card {
+            width: 100%;
+            max-width: 460px;
+            padding: 36px;
+            border: 1px solid rgba(255,255,255,.8);
+            border-radius: 28px;
+            background: rgba(255,255,255,.75);
+            box-shadow: 0 15px 45px rgba(88,70,128,.14);
+            backdrop-filter: blur(18px);
+        }
+
+        .brand {
+            text-align: center;
+            color: #A76BEB;
+            font-family: Fraunces, serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            text-align: center;
+            font-family: Fraunces, serif;
+            color: #7C53D6;
+        }
+
+        .subtitle {
+            margin-bottom: 26px;
+            text-align: center;
+            line-height: 1.6;
+            color: #746C84;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 5px;
+            border-radius: 14px;
+            background: #F5EEFF;
+        }
+
+        .tabs button {
+            flex: 1;
+            border: 0;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font: inherit;
+            color: #746C84;
+            background: transparent;
+        }
+
+        .tabs button.active {
+            color: white;
+            background: linear-gradient(135deg, #A76BEB, #7C53D6);
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #E1D5EF;
+            border-radius: 12px;
+            outline: none;
+            background: white;
+            font: inherit;
+        }
+
+        input:focus {
+            border-color: #A76BEB;
+            box-shadow: 0 0 0 3px rgba(167,107,235,.14);
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 14px;
+            border: 0;
+            border-radius: 14px;
+            color: white;
+            background: linear-gradient(135deg, #A76BEB, #7C53D6);
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit-button:disabled {
+            opacity: .65;
+            cursor: wait;
+        }
+
+        #message {
+            display: none;
+            margin: 16px 0 0;
+            padding: 12px;
+            border-radius: 12px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        #message.error {
+            display: block;
+            color: #8B1E3F;
+            background: #FFE7EF;
+        }
+
+        #message.success {
+            display: block;
+            color: #245D3A;
+            background: #E5F8EB;
+        }
+
+        .privacy-note {
+            margin-top: 22px;
+            text-align: center;
+            color: #746C84;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="account-card">
+        <div class="brand">🌸 PCOS Compass</div>
+        <h1 id="heading">Welcome back</h1>
+        <p class="subtitle" id="subtitle">
+            Log in to access your personal dashboard.
+        </p>
+
+        <div class="tabs">
+            <button type="button" id="login-tab" class="active">
+                Log In
+            </button>
+            <button type="button" id="signup-tab">
+                Create Account
+            </button>
+        </div>
+
+        <form id="account-form">
+            <div class="field" id="name-field" hidden>
+                <label for="name">Your name</label>
+                <input id="name" name="name" autocomplete="name">
+            </div>
+
+            <div class="field">
+                <label for="email">Email address</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    minlength="8"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <div class="field" id="confirm-field" hidden>
+                <label for="confirm-password">Confirm password</label>
+                <input
+                    id="confirm-password"
+                    name="confirm-password"
+                    type="password"
+                    minlength="8"
+                    autocomplete="new-password"
+                >
+            </div>
+
+            <button class="submit-button" id="submit-button" type="submit">
+                Log In
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="privacy-note">
+            Use a unique password. This project is still in development;
+            do not enter sensitive personal health information yet.
+        </p>
+    </main>
+
+    <script>
+        let mode = "login";
+
+        const form = document.getElementById("account-form");
+        const nameField = document.getElementById("name-field");
+        const confirmField = document.getElementById("confirm-field");
+        const nameInput = document.getElementById("name");
+        const passwordInput = document.getElementById("password");
+        const confirmInput = document.getElementById("confirm-password");
+        const submitButton = document.getElementById("submit-button");
+        const message = document.getElementById("message");
+
+        function setMode(nextMode) {
+            mode = nextMode;
+
+            const isSignup = mode === "signup";
+
+            nameField.hidden = !isSignup;
+            confirmField.hidden = !isSignup;
+
+            nameInput.required = isSignup;
+            confirmInput.required = isSignup;
+
+            passwordInput.autocomplete = isSignup
+                ? "new-password"
+                : "current-password";
+
+            document.getElementById("heading").textContent =
+                isSignup ? "Create your account" : "Welcome back";
+
+            document.getElementById("subtitle").textContent =
+                isSignup
+                    ? "Create an account to keep your symptom entries private to you."
+                    : "Log in to access your personal dashboard.";
+
+            submitButton.textContent =
+                isSignup ? "Create Account" : "Log In";
+
+            document.getElementById("login-tab").classList.toggle(
+                "active", !isSignup
+            );
+
+            document.getElementById("signup-tab").classList.toggle(
+                "active", isSignup
+            );
+
+            message.className = "";
+            message.textContent = "";
+            message.style.display = "none";
+        }
+
+        document.getElementById("login-tab").addEventListener(
+            "click", () => setMode("login")
+        );
+
+        document.getElementById("signup-tab").addEventListener(
+            "click", () => setMode("signup")
+        );
+
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = type;
+            message.style.display = "block";
+        }
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = passwordInput.value;
+
+            if (mode === "signup") {
+                if (!nameInput.value.trim()) {
+                    showMessage("Please enter your name.", "error");
+                    return;
+                }
+
+                if (password.length < 8) {
+                    showMessage(
+                        "Your password must be at least 8 characters.",
+                        "error"
+                    );
+                    return;
+                }
+
+                if (password !== confirmInput.value) {
+                    showMessage("Your passwords do not match.", "error");
+                    return;
+                }
+            }
+
+            const payload = { email, password };
+
+            if (mode === "signup") {
+                payload.name = nameInput.value.trim();
+            }
+
+            const endpoint = mode === "signup"
+                ? "/api/auth/signup"
+                : "/api/auth/login";
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Please wait...";
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload),
+                    credentials: "same-origin"
+                });
+
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    const detail = typeof data.detail === "string"
+                        ? data.detail
+                        : "Unable to complete your request.";
+
+                    throw new Error(detail);
+                }
+
+                showMessage(
+                    "Success! Opening your dashboard...",
+                    "success"
+                );
+
+                window.location.replace("/app");
+            } catch (error) {
+                showMessage(
+                    error.message || "Could not connect to the server.",
+                    "error"
+                );
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent =
+                    mode === "signup" ? "Create Account" : "Log In";
+            }
+        });
+    </script>
+</body>
+</html>
